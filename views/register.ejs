@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Register</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+</head>
+
+<body>
+  <div class="register">
+    <h1>Register</h1>
+    <div class="links">
+      <a href="/login">Login</a>
+      <a href="/register" class="active">Register</a>
+    </div>
+    <form action="/register" method="post" autocomplete="off">
+      <label for="firstname">
+        <i class="far fa-user"></i>
+      </label>
+      <input type="text" name="firstname" placeholder="First Name" id="firstname" required>
+      <label for="lastname">
+        <i class="far fa-user"></i>
+      </label>
+      <input type="text" name="lastname" placeholder="Last Name" id="lastname" required>
+      <label for="email">
+        <i class="fas fa-envelope"></i>
+      </label>
+      <input type="email" name="email" placeholder="Email" id="email" required>
+      <label for="username">
+        <i class="fas fa-user"></i>
+      </label>
+      <input type="text" name="username" placeholder="Username" id="username" required>
+      <label for="password">
+        <i class="fas fa-lock"></i>
+      </label>
+      <input type="password" name="password" placeholder="Password" id="password" required>
+      
+      <label for="picture">
+        <i class="fas fa-image"></i>
+      </label>
+      <input type="text" name="picture" placeholder="Profile Picture URL" id="picture">
+
+      <label for="facebook">
+        <i class="fab fa-facebook"></i>
+      </label>
+      <input type="text" name="facebook" placeholder="Facebook URL" id="facebook">
+
+      <label for="twitter">
+        <i class="fab fa-twitter"></i>
+      </label>
+      <input type="text" name="twitter" placeholder="Twitter URL" id="twitter">
+
+      <label for="instagram">
+        <i class="fab fa-instagram"></i>
+      </label>
+      <input type="text" name="instagram" placeholder="Instagram URL" id="instagram">
+
+      <label for="linkedin">
+        <i class="fab fa-linkedin"></i>
+      </label>
+      <input type="text" name="linkedin" placeholder="LinkedIn URL" id="linkedin">
+      
+      <label for="faculty">
+        <i class="fas fa-school"></i>
+      </label>
+      <select name="faculty" id="faculty" style="width:310px;">
+          <option value="" disabled selected>Choose your option</option>
+        </select>
+      <label for="department">
+        <i class="fas fa-chalkboard-teacher"></i>
+      </label>
+      <select name="department" id="department" style="width:310px;">
+          <option value="" disabled selected>Choose your option</option>
+        </select>
+      <label for="programme">
+        <i class="fas fa-book-open"></i>
+      </label>
+      <select name="programme" id="programme" style="width:310px;">
+          <option value="" disabled selected>Choose your option</option>
+        </select>
+      <label for="year">
+        <i class="fas fa-user-graduate"></i>
+      </label>
+      <select name="year" id="year" style="width:310px;">
+        <option value="2012">2012</option>
+        <option value="2013">2013</option>
+        <option value="2014">2014</option>
+        <option value="2015">2015</option>
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+      </select>
+      <input type="submit" value="Register">
+    </form>
+  </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"
+  integrity="sha512-suUtSPkqYmFd5Ls30Nz6bjDX+TCcfEzhFfqjijfdggsaFZoylvTj+2odBzshs0TCwYrYZhQeCgHgJEkncb2YVQ=="
+  crossorigin="anonymous"></script>
+<script>
+  setInterval(() => {
+    $("option:contains(undefined)").remove();
+  }, 100);
+
+  $.ajax('/api/progdata')
+    .done((progData) => {
+      for (var i = 0; i <= progData.length; i++) {
+        $('#faculty').append(`<option value="${progData[i]}">${progData[i]}</option>`);
+      }
+    })
+  
+  $('#faculty').on('change', function() {
+    $('#department').empty()
+    $('#programme').empty()
+    getDept(this.value)
+  });
+
+  function getDept(faculty) {
+    $.ajax(`/api/progdata/${faculty}`)
+    .done((progData) => {
+      for (var i = 0; i <= progData.length; i++) {
+        $('#department').append(`<option value="${progData[i]}">${progData[i]}</option>`);
+      }
+    })
+  }
+
+  $('#department').on('change', function() {
+    $('#programme').empty()
+    getProgramme($('#faculty').val(), this.value)
+  });
+
+  function getProgramme(faculty, dept) {
+    console.log(faculty, dept);
+    $.ajax(`/api/progdata/${faculty}/${dept}`)
+    .done((progData) => {
+      console.log(progData);
+      for (var i = 0; i <= progData.length; i++) {
+        $('#programme').append(`<option value="${progData[i]}">${progData[i]}</option>`);
+      }
+    })
+  }
+</script>
+</html>

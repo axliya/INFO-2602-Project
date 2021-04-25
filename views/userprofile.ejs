@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Profile</title>
+		<link rel="stylesheet" href="/static/style.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+<body>
+
+    <div class="profile" style="background-color: #b6ceee">
+
+   
+
+            <a name="Top of page"></a>
+
+            <nav>
+            <div class="nav-wrapper" style="background-color: #3274d6;">
+                <a href="#" class="brand-logo right" style="background-color: #3274d6;">
+                    STARK
+                </a>
+              <ul id="nav-mobile">
+                <li><a href="/home">Home</a></li>
+                <li><a class="active" href="/profile">Profile</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/signout">Sign Out</a></li>
+              </ul>
+            </div>
+          </nav>
+
+                <br><br><br>
+        
+                
+                <hr class="solid" style="width: 20%">
+                <br><br>
+        
+                <div class = "row">
+                    <div class="col s9 offset-s3">
+                    <div class="card horizontal">
+                    <div class="card-image" >
+                       
+                        <img src="<%= user.picture %>" style="width: 50%">
+                        <h4 class="center-align" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+                            <%= user.fname %> <%= user.lname %>
+                        </h4>
+                    </div>
+                    <div class="card-stacked" style="resize: none; width: 100%; height: 100%;">
+                        <div class="card-content" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
+                        <p>
+                            <%= user.faculty %>
+                            <br>
+                            <%= user.department %>
+                            <br>
+                            <%= user.programme %>
+                            <br>
+                            <%= user.year %>
+                            <br><br>
+                            <h5 class="center-align">
+                                Biography
+                            </h5>
+                            <div class="form-group">
+                                <label for="biography"></label>
+                                <textarea class="form-control" rows="5" id="biography" style="resize: none; width: 100%; height: 100px;"><%= user.biography %></textarea>
+                                <button onclick="editBio()" type="button" class="btn btn-outline-primary" style="color:black; border-block-color: rgb(14, 85, 109); background-color: rgb(238, 231, 231);">Edit</button>
+                            </div>
+                        </p>
+                        </div>
+                        <div class="card-action center-align" >
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+                
+            <div class="home" style="background-color: #bad3f3">
+                <br><br>
+                <hr class="solid" style="width: 20%">
+                <br><br>
+        
+        
+                
+         <div class="row">
+                <div class="col s4 offset-s3">
+        
+                    <div class="card rounded" style="width: 16rem;">
+                    <div class="card-body">
+                        <h5 class="center-align" >Featured Works:</h5>
+                        <textarea class="form-control rounded" rows="5" id="featuredworks" style="resize: none; height: 100px; width: 200px; display: block; margin-left: auto; margin-right: auto;"><%= user.featuredWorks %></textarea>
+                        <button onclick="editWorks()" type="button" class="btn btn-outline-primary" style="color:black; border-block-color: rgb(14, 85, 109); background-color: rgb(238, 231, 231);">Edit</button>
+                    </div>
+                    </div>
+        
+        </div>
+                
+        <div class="col s4">
+        
+                <div class="card " style="width: 15rem;">
+                <div class="card-body">
+                    <h5 class="center-align" >Let's Connect!</h5>
+                    <a href="<%= user.sm_facebook %>" class="fa fa-facebook"></a>
+                    <a href="<%= user.sm_twitter %>" class="fa fa-twitter"></a>
+                    <a href="<%= user.sm_instagram %>" class="fa fa-instagram"></a>
+                    <a href="<%= user.sm_linkedin %>" class="fa fa-linkedin"></a>
+                </div>
+                </div>
+         
+         </div>
+        
+            </div>
+            <br><br>
+                <a href="#Top of page" style="font-family:Verdana, Geneva, Tahoma, sans-serif ;color: black">
+                Go to top of page</a>
+                <br><br>
+
+    </div>
+
+    
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"
+  integrity="sha512-suUtSPkqYmFd5Ls30Nz6bjDX+TCcfEzhFfqjijfdggsaFZoylvTj+2odBzshs0TCwYrYZhQeCgHgJEkncb2YVQ=="
+  crossorigin="anonymous"></script>
+<script>
+    function editBio() {
+        $.post('/api/edit/bio', { biography: $('#biography').val()}, function (data) {
+            alert(data)
+        })
+    }
+    
+    function editWorks() {
+        $.post('/api/edit/works', { featuredworks: $('#featuredworks').val()}, function (data) {
+            alert(data)
+        })
+    }
+</script>
+</html>

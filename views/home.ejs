@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+  <div class="home" style="background-color: #b6ceee">
+
+    <a name="Top of page"></a>
+
+    <nav>
+      <div class="nav-wrapper" style="background-color: #3274d6;">
+        <a href="#" class="brand-logo right" style="background-color: #3274d6;">STARK</a>
+        <ul id="nav-mobile">
+          <li><a class="active" href="/home">Home</a></li>
+          <li><a href="/profile">Profile</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/signout">Sign Out</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <br><br>
+
+    <h3 class="center-align" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+      Stark University</h3>
+
+
+    <h1 class="center-align" style="font-family: Verdana, Geneva, Tahoma, sans-serif">
+      Alumni Gallery</h1>
+
+    <br><br><br>
+    <div class="row">
+      <div class="col s10 offset-s2">
+        <form>
+          <div class="input-field">
+            <input id="search" type="search" required style="background-color:white; width: 75%">
+            <label class="label-icon" for="search"><i class="material-icons" style="color: rgb(105, 104, 104)">Search by
+                name</i></label>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+    <br><br>
+    <hr class="solid" style="width: 20%">
+    <br><br><br>
+
+    <h3 class="center-align" style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+      Our Gallery:
+
+    </h3>
+
+    <div class="row">
+      <div class="col s3">
+        Filter By
+        <br>
+        <label>Faculty</label>
+        <select id="select_faculty" class="browser-default">
+          <option value="" disabled selected>Choose your option</option>
+        </select>
+        <br>
+        <label>Department</label>
+        <select id="select_department" class="browser-default">
+          <option value="" disabled selected>Choose your option</option>
+        </select>
+        <br>
+        <label>Programme</label>
+        <select id="select_programme" class="browser-default">
+          <option value="" disabled selected>Choose your option</option>
+        </select>
+        <br>
+        <label>Year</label>
+        <select class="browser-default">
+          <option value="" disabled selected>Choose your option</option>
+          <option value="2012">2012</option>
+          <option value="2013">2013</option>
+          <option value="2014">2014</option>
+          <option value="2015">2015</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+        </select>
+      </div>
+
+      <div id="userlist">
+      </div>
+
+    </div>
+
+
+
+    <br><br><br>
+    <a href="#Top of page" style="font-family:Verdana, Geneva, Tahoma, sans-serif; color: black">
+      Go to top of page</a>
+    <br><br>
+
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.0/jquery.min.js"
+  integrity="sha512-suUtSPkqYmFd5Ls30Nz6bjDX+TCcfEzhFfqjijfdggsaFZoylvTj+2odBzshs0TCwYrYZhQeCgHgJEkncb2YVQ=="
+  crossorigin="anonymous"></script>
+<script>
+  setInterval(() => {
+    $("option:contains(undefined)").remove();
+  }, 100);
+
+  function populateUserlist(user) {
+    $('#userlist').append(`
+        <div class="col s3 offset-s1">
+          <div class="card">
+            <a href="/profile/${user.username}">
+              <div class="card-image">
+                <img src="${user.picture}"
+                  style="height: auto; width:100%;">
+                <span class="card-title" style="color: black">${user.fname} ${user.lname}</span>
+              </div>
+            </a>
+              <div class="card-content">
+                <p>
+                  ${user.faculty}<hr>
+                  ${user.department}<hr>
+                  ${user.programme}<br>
+                  ${user.year || ''}
+                </p>
+              </div>
+            <div class="card-action">
+              <a href="#">Social Media links</a><br>
+              <a href="${user.sm_facebook || '#'}" class="fa fa-facebook"></a>
+              <a href="${user.sm_twitter || '#'}" class="fa fa-twitter"></a>
+              <a href="${user.sm_instagram || '#'}" class="fa fa-instagram"></a>
+              <a href="${user.sm_linkedin || '#'}" class="fa fa-linkedin"></a>
+            </div>
+          </div>
+        </div>
+        `);
+  }
+
+  $.ajax('/api/userlist')
+    .done((userlist) => {
+      $('#userlist').html('');
+      for (var i = 0; i <= userlist.length; i++) {
+        populateUserlist(userlist[i]);
+      }
+    })
+
+  $.ajax('/api/progdata')
+    .done((progData) => {
+      for (var i = 0; i <= progData.length; i++) {
+        $('#select_faculty').append(`<option value="${progData[i]}">${progData[i]}</option>`);
+      }
+    })
+  
+  $('#select_faculty').on('change', function() {
+    $('#select_department').empty()
+    $('#select_programme').empty()
+    getDept(this.value)
+    $.ajax(`/api/userlist/f/${$('#select_faculty').val()}`)
+    .done((userlist) => {
+      $('#userlist').html('');
+      for (var i = 0; i <= userlist.length; i++) {
+        populateUserlist(userlist[i]);
+      }
+    })
+  });
+
+  function getDept(faculty) {
+    $.ajax(`/api/progdata/${faculty}`)
+    .done((progData) => {
+      for (var i = 0; i <= progData.length; i++) {
+        $('#select_department').append(`<option value="${progData[i]}">${progData[i]}</option>`);
+      }
+    })
+  }
+
+  $('#select_department').on('change', function() {
+    $('#select_programme').empty()
+    getProgramme($('#select_faculty').val(), this.value)
+    $.ajax(`/api/userlist/d/${$('#select_department').val()}`)
+    .done((userlist) => {
+      $('#userlist').html('');
+      for (var i = 0; i <= userlist.length; i++) {
+        populateUserlist(userlist[i]);
+      }
+    })
+  });
+
+  $('#select_programme').on('change', function() {
+    $.ajax(`/api/userlist/p/${$('#select_programme').val()}`)
+    .done((userlist) => {
+      $('#userlist').html('');
+      for (var i = 0; i <= userlist.length; i++) {
+        populateUserlist(userlist[i]);
+      }
+    })
+  });
+
+  function getProgramme(faculty, dept) {
+    $.ajax(`/api/progdata/${faculty}/${dept}`)
+    .done((progData) => {
+      for (var i = 0; i <= progData.length; i++) {
+        $('#select_programme').append(`<option value="${progData[i]}">${progData[i]}</option>`);
+      }
+    })
+  }
+</script>
+
+</html>

@@ -1,0 +1,435 @@
+* {
+  	box-sizing: border-box;
+  	font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen, ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial, sans-serif;
+  	font-size: 16px;
+  	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
+}
+body {
+  	background-color: #b6ceee;
+  	margin: 0;
+}
+.login, .register {
+  	width: 400px;
+  	background-color: #ffffff;
+  	box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
+  	margin: 100px auto;
+}
+.login h1, .register h1 {
+  	text-align: center;
+  	color: #5b6574;
+  	font-size: 24px;
+  	padding: 20px 0 20px 0;
+  	border-bottom: 1px solid #dee0e4;
+}
+.login .links, .register .links {
+  	display: flex;
+  	padding: 0 15px;
+}
+.login .links a, .register .links a {
+  	color: #adb2ba;
+  	text-decoration: none;
+  	display: inline-flex;
+  	padding: 0 10px 10px 10px;
+  	font-weight: bold;
+}
+.login .links a:hover, .register .links a:hover {
+  	color: #9da3ac;
+}
+.login .links a.active, .register .links a.active {
+  	border-bottom: 3px solid #3274d6;
+  	color: #3274d6;
+}
+.login form, .register form {
+  	display: flex;
+  	flex-wrap: wrap;
+  	justify-content: center;
+  	padding-top: 20px;
+}
+.login form label, .register form label {
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	width: 50px;
+  	height: 50px;
+  	background-color: #3274d6;
+  	color: #ffffff;
+}
+.login form input[type="password"], .login form input[type="text"], .login form input[type="email"], .register form input[type="password"], .register form input[type="text"], .register form input[type="email"] {
+  	width: 310px;
+  	height: 50px;
+  	border: 1px solid #dee0e4;
+  	margin-bottom: 20px;
+  	padding: 0 15px;
+}
+.login form input[type="submit"], .register form input[type="submit"] {
+  	width: 100%;
+  	padding: 15px;
+  	margin-top: 20px;
+  	background-color: #3274d6;
+  	border: 0;
+  	cursor: pointer;
+  	font-weight: bold;
+  	color: #ffffff;
+  	transition: background-color 0.2s;
+}
+.login form input[type="submit"]:hover, .register form input[type="submit"]:hover {
+  	background-color: #2868c7;
+  	transition: background-color 0.2s;
+}
+.navtop {
+  	background-color: #2f3947;
+  	height: 60px;
+  	width: 100%;
+  	border: 0;
+}
+.navtop div {
+  	display: flex;
+  	margin: 0 auto;
+  	width: 1000px;
+  	height: 100%;
+}
+.navtop div h1, .navtop div a {
+  	display: inline-flex;
+  	align-items: center;
+}
+.navtop div h1 {
+  	flex: 1;
+  	font-size: 24px;
+  	padding: 0;
+ 	margin: 0;
+  	color: #eaebed;
+  	font-weight: normal;
+}
+.navtop div a {
+  	padding: 0 20px;
+  	text-decoration: none;
+  	color: #c1c4c8;
+  	font-weight: bold;
+}
+.navtop div a i {
+  	padding: 2px 8px 0 0;
+}
+.navtop div a:hover {
+  	color: #eaebed;
+}
+body.loggedin {
+  	background-color: #f3f4f7;
+}
+.content {
+  	width: 1000px;
+  	margin: 0 auto;
+}
+.content h2 {
+  	margin: 0;
+  	padding: 25px 0;
+  	font-size: 22px;
+  	border-bottom: 1px solid #e0e0e3;
+  	color: #4a536e;
+}
+.content > p, .content > div {
+  	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  	margin: 25px 0;
+  	padding: 25px;
+	background-color: #fff;
+}
+.content > p table td, .content > div table td {
+	padding: 5px;
+}
+.content > p table td:first-child, .content > div table td:first-child {
+	font-weight: bold;
+	color: #4a536e;
+	padding-right: 15px;
+}
+.content > div p {
+	padding: 5px;
+	margin: 0 0 10px 0;
+}
+
+a[href*="Top of page"]{
+    font-family:'Lucida Console',monospace; 
+    font-size: 3;
+    color: black; 
+    font-weight:bold;
+}
+
+.topnav{
+    background-color: #5b6574;
+    overflow:auto;
+    width: 100%;
+}
+
+.topnav a{
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 17px;
+    width: 25%;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav a.active {
+    background-color: #341281;
+    color: white;
+}
+
+/*responsiveness to smaller screen*/
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+hr.solid{
+    border-top:  4px solid #2f3947;
+    width: 20%
+}
+
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 65%;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}  
+
+.container{
+    display:flex;
+}
+
+.left{
+    background-color: #3274d6;
+    flex:1;
+}
+
+.right{
+    background-color: #dee0e4;
+    flex:1;
+}
+
+.bio{
+      width: 100%;
+     height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+.title{
+    text-align: center;
+    font-family:"Times New Roman", Times ,serif; 
+    font-size: 40px; 
+    color: black; 
+    font-weight:bold;
+}
+
+.gallery{
+    text-align: center;
+    font-family:"Times New Roman", Times ,serif; 
+    font-size: 50px; 
+    color: black; 
+    font-weight:bold;
+    font-style: italic;
+}
+
+.search input[type=text]{
+    padding: 10px;
+    font-size: 17px;
+    border: 2px solid grey;
+    float: left;
+     width: 80%;
+    background: #f1f1f1;
+    
+}
+
+.search button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+.search button:hover {
+  background: #0b7dda;
+}
+
+.search::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.fac{
+    text-align: left;
+    font-family:"Times New Roman", Times ,serif; 
+    font-size: 20px; 
+    color: black; 
+    font-weight:bold;
+}
+
+
+.flexbox{
+    
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: #4a536e;
+  
+  
+}
+
+.flexbox > div{
+width: 250px;
+    background-color: #f1f1f1;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+  flex: 1 1 auto;
+}
+
+.gal{
+    text-align: center;
+    font-family:"Times New Roman", Times ,serif; 
+    font-size: 30px; 
+    color: black; 
+    font-weight:bold;
+    font-style: italic;
+}
+
+.title2{
+    text-align: center;
+    font-family:"Times New Roman", Times ,serif; 
+    font-size: 40px; 
+    color: black; 
+    font-weight:bold;
+}
+
+.ab{
+    text-align: left;
+    font-family:"Times New Roman", Times ,serif; 
+    font-size:35px; 
+    color: black; 
+    font-weight:bold;
+    font-style: italic;
+}
+
+.aboutbox{
+   border-radius: 25px;
+  background-color: #9da3ac;
+  padding: 20px; 
+  width: 530px;
+  height: 320px; 
+  
+    margin: auto;
+    /*width: 60%;
+    border: 2px solid rgb(16, 21, 10);*/
+    padding: 10px;
+
+
+    font-family:"Times New Roman", Times ,serif; 
+    font-size: 20px; 
+    color: black; 
+    font-weight:bold;
+    text-align: center;
+
+}
+
+
+.contact {
+   border-radius: 25px;
+  background-color: #9da3ac;
+  padding: 20px; 
+  width: 500px;
+  height: 280px; 
+  
+    margin: auto;
+    /*width: 60%;
+    border: 2px solid rgb(16, 21, 10);*/
+    padding: 10px;
+
+
+    font-family:"Times New Roman", Times ,serif; 
+    font-size: 27px; 
+    color: black; 
+    font-weight:bold;
+
+    text-align: center;
+
+}
+
+.contact >div{
+
+    font-family:"Times New Roman", Times ,serif; 
+    font-size: 20px; 
+    color: black; 
+    font-weight:bold;
+
+    text-align: left;
+}
+
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+}
+
+.fa:hover {
+  opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
